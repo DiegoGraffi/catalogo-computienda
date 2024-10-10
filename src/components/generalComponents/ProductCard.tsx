@@ -34,9 +34,19 @@ export default function rodeProductCard({
         </div>
 
         <div className="bg-[#F9FAFB] flex flex-col justify-center items-center px-5 py-8 gap-4">
-          <p className="text-lg text-center text-[#4D5461] font-bold group-hover:text-[#00AFEF] transition-all ease-in-out duration-200">
-            {name}
-          </p>
+          <div className="h-[3rem] flex items-center overflow-hidden">
+            <p
+              className="text-lg text-center text-[#4D5461] font-bold group-hover:text-[#00AFEF] transition-all ease-in-out duration-200
+              line-clamp-2 overflow-hidden text-ellipsis"
+              style={{
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {name}
+            </p>
+          </div>
           <p className="text-2xl text-center text-[#4D5461] font-bold">
             ${price}
           </p>

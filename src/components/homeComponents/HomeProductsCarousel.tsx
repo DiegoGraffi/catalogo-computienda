@@ -54,7 +54,7 @@ export default function HomeProductsCarousel() {
     return <p>Cargando productos...</p>;
   }
 
-  const recomendados = data.slice(0, 6);
+  const recomendados = data.slice(0, 100);
 
   return (
     <div className="flex flex-col gap-5 py-5">
