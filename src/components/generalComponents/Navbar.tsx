@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
-import CartIcon from "@/assets/icons/cart-alt.svg";
-import LanguageIcon from "@/assets/icons/internet.svg";
-import UserIcon from "@/assets/icons/user.svg";
-import SearchIcon from "@/assets/icons/search.svg";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
     <div className="flex justify-center items-center w-[100vw] min-h-[10vh] px-[30px] py-[10px]">
       <div className="max-w-[1600px] h-full w-full items-center justify-center flex">
-        <Image src={Logo} alt="Logo" width={200} />
+        <Link href={"/"}>
+          <Image src={Logo} alt="Logo" width={200} />
+        </Link>
 
         {/* <div className="flex flex-col gap-3">
           <div className="flex border rounded-full px-3 py-2 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
