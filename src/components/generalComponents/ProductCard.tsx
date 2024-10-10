@@ -1,15 +1,18 @@
 import imageProduct from "@/assets/imagenProducto.png";
 import Image from "next/image";
 import Link from "next/link";
+import LogoSmall from "@/assets/logoSmall.png";
 
 export default function rodeProductCard({
   name,
   price,
   codigoInterno,
+  imagen,
 }: {
   name: string;
   price: number;
   codigoInterno: string;
+  imagen: string;
 }) {
   return (
     <div className="relative group border hover:border-[#00AFEF] transition-all ease-in-out duration-200">
@@ -20,9 +23,9 @@ export default function rodeProductCard({
         <div className="w-full h-full relative">
           <div className="w-full mx-auto aspect-square relative overflow-hidden">
             <Image
-              src={imageProduct}
+              src={imagen !== null ? imagen : LogoSmall}
               fill
-              className="object-contain group-hover:scale-105 transition-all ease-in-out duration-200"
+              className="object-contain group-hover:scale-105 transition-all ease-in-out duration-200 p-4"
               alt="imagen producto"
             />
             <div className="absolute top-0 right-0 bg-[#00AFEF] flex py-2 px-3 justify-center items-center">

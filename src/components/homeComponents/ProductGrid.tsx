@@ -53,12 +53,15 @@ export default function ProductGrid() {
       {productos && productos.length > 0
         ? productos.map((prod, i) => {
             return (
-              <ProductCard
-                codigoInterno={prod.codigoInterno}
-                name={prod.nombre}
-                price={100}
-                key={i}
-              />
+              <div className="w-full h-full min-h-[150px] flex justify-center items-center">
+                <ProductCard
+                  codigoInterno={prod.codigoInterno}
+                  name={prod.nombre}
+                  imagen={prod.imagenes}
+                  price={100}
+                  key={i}
+                />
+              </div>
             );
           })
         : null}
