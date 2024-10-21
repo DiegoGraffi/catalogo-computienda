@@ -2,28 +2,40 @@ import imageProduct from "@/assets/imagenProducto.png";
 import Image from "next/image";
 import Link from "next/link";
 import LogoSmall from "@/assets/logoSmall.png";
+import { Badge } from "../ui/badge";
 
 export default function rodeProductCard({
   name,
   price,
   codigoInterno,
   imagen,
+  marca,
 }: {
   name: string;
   price: number;
   codigoInterno: string;
   imagen: string;
+  marca: string;
 }) {
   return (
-    <div className="relative group border hover:border-[#00AFEF] transition-all ease-in-out duration-200">
+    <div className="relative group border hover:border-[#00AFEF] transition-all ease-in-out duration-200 w-full">
       <Link
         href={`/producto/${encodeURIComponent(codigoInterno)}`}
         className="shadow-[0px_0px_5px_rgba(0,0,0,0.2)]"
       >
         <div className="w-full h-full relative">
           <div className="w-full mx-auto aspect-square relative overflow-hidden">
+            {marca !== "GENERICO" ? (
+              <Badge
+                className="absolute bottom-2 left-2 z-50 bg-white"
+                variant={"outline"}
+              >
+                <p className="">{marca}</p>
+              </Badge>
+            ) : null}
+
             <Image
-              src={imagen !== null ? imagen : LogoSmall}
+              src={imagen && imagen !== "" ? imagen : LogoSmall}
               fill
               className="object-contain group-hover:scale-105 transition-all ease-in-out duration-200 p-4"
               alt="imagen producto"

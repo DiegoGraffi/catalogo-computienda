@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import ProductCard from "../generalComponents/ProductCard";
+import Image from "next/image";
+import LogoSmall from "@/assets/logoSmall.png";
 
 interface Product {
   id: number;
@@ -15,49 +17,40 @@ interface Product {
   created_at: string;
 }
 
-export default function ProductGrid() {
-  const [data, setData] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+interface ProductGridType {
+  filteredProducts: Product[];
+  loading: boolean;
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://computienda-nu.vercel.app/api/productos"
-        );
-
-        if (!response.ok) {
-          throw new Error("Error en la carga de datos");
-        }
-
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+export default function ProductGrid({
+  filteredProducts,
+  loading,
+}: ProductGridType) {
   if (loading) {
-    return <p>Cargando productos...</p>;
+    return (
+      <div className="w-full flex justify-center items-center py-10">
+        <Image
+          src={LogoSmall}
+          alt="logo"
+          width={100}
+          height={100}
+          className="animate-pulse"
+        />
+      </div>
+    );
   }
-
-  const productos = data;
 
   return (
     <div className="w-full h-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 row-auto gap-3">
-      {productos && productos.length > 0
-        ? productos.map((prod, i) => {
+      {filteredProducts && filteredProducts.length > 0
+        ? filteredProducts.map((prod, i) => {
             return (
-              <div className="w-full h-full min-h-[150px] flex justify-center items-center">
+              <div className="w-full h-full min-h-[150px] flex justify-stretch items-center">
                 <ProductCard
                   codigoInterno={prod.codigoInterno}
                   name={prod.nombre}
                   imagen={prod.imagenes}
+                  marca={prod.marca}
                   price={100}
                   key={i}
                 />
