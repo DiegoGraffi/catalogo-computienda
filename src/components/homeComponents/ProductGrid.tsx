@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../generalComponents/ProductCard";
 import Image from "next/image";
 import LogoSmall from "@/assets/logoSmall.png";
+import PaginationControls from "./PaginationControls";
 
 interface Product {
   id: number;
@@ -20,11 +21,15 @@ interface Product {
 interface ProductGridType {
   filteredProducts: Product[];
   loading: boolean;
+  end?: number;
+  start?: number;
 }
 
 export default function ProductGrid({
   filteredProducts,
   loading,
+  end,
+  start,
 }: ProductGridType) {
   if (loading) {
     return (
@@ -58,6 +63,10 @@ export default function ProductGrid({
             );
           })
         : null}
+      {/* <PaginationControls
+        hasNextPage={end < filteredProducts.length}
+        hasPrevPage={start > 0}
+      /> */}
     </div>
   );
 }

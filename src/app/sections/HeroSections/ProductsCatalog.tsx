@@ -27,11 +27,20 @@ interface Product {
   created_at: string;
 }
 
-export default function ProductsCatalog() {
+export default function ProductsCatalog({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 10;
+
+  const page = searchParams["page"] ?? "1";
+  const per_page = searchParams["per_page"] ?? "5";
+
+  const start = (Number(page) - 1) * Number(per_page);
+  const end = start + Number(per_page);
 
   useEffect(() => {
     const fetchData = async () => {
