@@ -50,14 +50,14 @@ export default function ProductGrid({
       {filteredProducts && filteredProducts.length > 0
         ? filteredProducts.map((prod, i) => {
             return (
-              <div className="w-full h-full min-h-[150px] flex justify-stretch items-center">
+              <div key={i} className="w-full h-full min-h-[150px] flex justify-stretch items-center">
                 <ProductCard
                   codigoInterno={prod.codigoInterno}
                   name={prod.nombre}
                   imagen={prod.imagenes}
                   marca={prod.marca}
                   price={100}
-                  key={i}
+
                 />
               </div>
             );

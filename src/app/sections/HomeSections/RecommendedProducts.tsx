@@ -1,10 +1,8 @@
 "use client";
-import FiltersSection from "@/components/homeComponents/FiltersSection";
-import ProductGrid from "@/components/homeComponents/ProductGrid";
-import Image from "next/image";
-import SearchIcon from "@/assets/icons/search.svg";
-import { X } from "lucide-react";
+
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -13,6 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import FiltersSection from "@/components/homeComponents/FiltersSection";
+import ProductGrid from "@/components/homeComponents/ProductGrid";
+import SearchIcon from "@/assets/icons/search.svg";
+import PaginationControls from "@/components/homeComponents/PaginationControls";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Product {
   id: number;
@@ -27,20 +30,19 @@ interface Product {
   created_at: string;
 }
 
-export default function ProductsCatalog({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default function RecommendedProducts() {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const page = searchParams["page"] ?? "1";
-  const per_page = searchParams["per_page"] ?? "5";
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const start = (Number(page) - 1) * Number(per_page);
-  const end = start + Number(per_page);
+  const page = Number(searchParams.get("page") ?? "1");
+  const per_page = Number(searchParams.get("per_page") ?? "12");
+
+  const start = (page - 1) * per_page;
+  const end = start + per_page;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,12 +67,10 @@ export default function ProductsCatalog({
     fetchData();
   }, []);
 
-  const products = data;
-
   const filteredProducts = useMemo(() => {
     const searchWords = searchTerm.toLowerCase().split(" ").filter(Boolean);
 
-    return products.filter((product) => {
+    return data.filter((product) => {
       const codigoInternoMatch = product.codigoInterno
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
@@ -98,13 +98,21 @@ export default function ProductsCatalog({
         subRubroMatch
       );
     });
-  }, [products, searchTerm]);
+  }, [data, searchTerm]);
+
+  const paginatedProducts = filteredProducts.slice(start, end);
+
+  const updateQueryString = (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(name, value);
+    return params.toString();
+  };
 
   return (
     <div className="w-full max-w-[1600px] flex flex-col gap-5 mx-auto p-4">
       <div className="w-full justify-between flex items-center p-4">
         <div className="flex border max-w-[500px] rounded-full px-3 py-2 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
-          <Image src={SearchIcon} alt="Search Icon" width={20} />
+          <Image src={SearchIcon} alt="Search Icon" width={20} height={20} />
           <input
             type="text"
             className="w-full ml-2 rounded-r-full border-l px-2 focus:outline-none"
@@ -117,7 +125,12 @@ export default function ProductsCatalog({
 
         <div className="flex gap-3 items-center font-poppins text-azulClaro">
           <Label>Items por página</Label>
-          <Select>
+          <Select
+            value={per_page.toString()}
+            onValueChange={(value) => {
+              router.push(`/productos?${updateQueryString("per_page", value)}`);
+            }}
+          >
             <SelectTrigger className="w-[100px]">
               <SelectValue placeholder="Items" />
             </SelectTrigger>
@@ -136,9 +149,16 @@ export default function ProductsCatalog({
         </div>
 
         <div className="rounded-md basis-5/6 p-4">
-          <ProductGrid filteredProducts={filteredProducts} loading={loading} />
+          <ProductGrid filteredProducts={paginatedProducts} loading={loading} />
         </div>
       </div>
+      <PaginationControls
+        hasNextPage={end < filteredProducts.length}
+        hasPrevPage={start > 0}
+        totalPages={Math.ceil(filteredProducts.length / per_page)}
+        currentPage={page}
+        perPage={per_page}
+      />
     </div>
   );
 }

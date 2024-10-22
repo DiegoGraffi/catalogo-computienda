@@ -1,25 +1,18 @@
-import ProductGrid from "@/components/homeComponents/ProductGrid";
+import { Suspense } from "react";
+import RecommendedProducts from "../sections/HomeSections/RecommendedProducts";
 
-export default function products() {
+export const fetchCache = "force-no-store";
+
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   return (
-    <div className="min-h-screen w-screen flex ">
-      <div className="basis-2/6 border">
-        <ul>
-          <li>item 1</li>
-          <li>item 1</li>
-          <li>item 1</li>
-          <li>item 1</li>
-          <li>item 1</li>
-          <li>item 1</li>
-          <li>item 1</li>
-          <li>item 1</li>
-          <li>item 1</li>
-        </ul>
-      </div>
-
-      <div className="basis-4/6 border">
-        <ProductGrid />
-      </div>
+    <div className="w-screen overflow-x-hidden min-h-screen">
+      <Suspense fallback={<div>Loading...</div>}>
+        <RecommendedProducts />
+      </Suspense>
     </div>
   );
 }
