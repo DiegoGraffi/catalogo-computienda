@@ -19,18 +19,26 @@ export default function Navbar() {
             />
           </div> */}
           <ul className="flex justify-between gap-10 ">
-            <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
-              Inicio
-            </li>
-            <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
-              Productos
-            </li>
-            <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
-              Nosotros
-            </li>
-            <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
-              Empresas
-            </li>
+            <Link href={"/"}>
+              <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
+                Inicio
+              </li>
+            </Link>
+            <Link href={"/productos"}>
+              <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
+                Productos
+              </li>
+            </Link>
+            <Link href={"/nosotros"}>
+              <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
+                Nosotros
+              </li>
+            </Link>
+            <Link href={"/empresas"}>
+              <li className="font-poppins text-grisOrg hover:text-azulOrg hover:underline transition-all ease-in-out duration-200 cursor-pointer">
+                Empresas
+              </li>
+            </Link>
           </ul>
         </div>
 
