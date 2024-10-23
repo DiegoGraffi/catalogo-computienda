@@ -7,9 +7,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import Banner from "@/assets/HeroBanner.png";
-import Banner2 from "@/assets/HeroBanner2.jpg";
-import Banner3 from "@/assets/HeroBanner3.jpg";
+import Banner from "@/assets/images/HeroBanner.png";
+import Banner2 from "@/assets/images/HeroBanner2.jpg";
+import Banner3 from "@/assets/images/HeroBanner3.jpg";
 import Autoplay from "embla-carousel-autoplay";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";

@@ -1,7 +1,7 @@
-import imageProduct from "@/assets/imagenProducto.png";
+import imageProduct from "@/assets/images/imagenProducto.png";
 import Image from "next/image";
 import Link from "next/link";
-import LogoSmall from "@/assets/logoSmall.png";
+import LogoSmall from "@/assets/images/logoSmall.png";
 import { Badge } from "../ui/badge";
 
 export default function rodeProductCard({

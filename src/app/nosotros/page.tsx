@@ -5,7 +5,7 @@ import { CldVideoPlayer } from "next-cloudinary";
 
 export default function Nosotros() {
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-20">
       <div className="w-full h-[620px] relative overflow-hidden">
         <div className="absolute inset-0">
           <CldVideoPlayer
@@ -19,7 +19,7 @@ export default function Nosotros() {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-6 items-center mt-8">
+      <div className="flex flex-col gap-6 items-center">
         <h3 className="font-poppins text-[48px]/[58px] text-azulOrg">
           <b>SOBRE</b> NOSOTROS
         </h3>
@@ -35,6 +35,7 @@ export default function Nosotros() {
         </div>
       </div>
       <GallerySection />
+      <div>Reseñas</div>
     </div>
   );
 }

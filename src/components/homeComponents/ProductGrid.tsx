@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../generalComponents/ProductCard";
 import Image from "next/image";
-import LogoSmall from "@/assets/logoSmall.png";
+import LogoSmall from "@/assets/images/logoSmall.png";
 import PaginationControls from "./PaginationControls";
 import { Product } from "@/app/productos/page";
 
