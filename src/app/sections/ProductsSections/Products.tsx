@@ -15,7 +15,6 @@ import FiltersSection from "@/components/homeComponents/FiltersSection";
 import ProductGrid from "@/components/homeComponents/ProductGrid";
 import SearchIcon from "@/assets/icons/search.svg";
 import PaginationControls from "@/components/homeComponents/PaginationControls";
-import { useRouter, useSearchParams } from "next/navigation";
 
 interface Product {
   id: number;
@@ -30,47 +29,29 @@ interface Product {
   created_at: string;
 }
 
-export default function RecommendedProducts() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const page = Number(searchParams.get("page") ?? "1");
-  const per_page = Number(searchParams.get("per_page") ?? "12");
-
-  const start = (page - 1) * per_page;
-  const end = start + per_page;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://computienda-nu.vercel.app/api/productos"
-        );
-
-        if (!response.ok) {
-          throw new Error("Error en la carga de datos");
-        }
-
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+export default function Products({
+  products,
+  loading,
+  totalPages,
+  searchTerm,
+  setSearchTerm,
+  productsPerPage,
+  setProductsPerPage,
+  listaFiltros,
+}: {
+  products: Product[];
+  loading: any;
+  totalPages: number;
+  searchTerm: string;
+  setSearchTerm: any;
+  productsPerPage: number;
+  setProductsPerPage: any;
+  listaFiltros: string[];
+}) {
   const filteredProducts = useMemo(() => {
     const searchWords = searchTerm.toLowerCase().split(" ").filter(Boolean);
 
-    return data.filter((product) => {
+    return products.filter((product) => {
       const codigoInternoMatch = product.codigoInterno
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
@@ -98,15 +79,7 @@ export default function RecommendedProducts() {
         subRubroMatch
       );
     });
-  }, [data, searchTerm]);
-
-  const paginatedProducts = filteredProducts.slice(start, end);
-
-  const updateQueryString = (name: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set(name, value);
-    return params.toString();
-  };
+  }, [products, searchTerm]);
 
   return (
     <div className="w-full max-w-[1600px] flex flex-col gap-5 mx-auto p-4">
@@ -126,18 +99,16 @@ export default function RecommendedProducts() {
         <div className="flex gap-3 items-center font-poppins text-azulClaro">
           <Label>Items por página</Label>
           <Select
-            value={per_page.toString()}
-            onValueChange={(value) => {
-              router.push(`/productos?${updateQueryString("per_page", value)}`);
-            }}
+            value={productsPerPage.toString()}
+            onValueChange={(value) => setProductsPerPage(Number(value))}
           >
             <SelectTrigger className="w-[100px]">
               <SelectValue placeholder="Items" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="12">12</SelectItem>
               <SelectItem value="24">24</SelectItem>
               <SelectItem value="36">36</SelectItem>
+              <SelectItem value="48">48</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -145,20 +116,14 @@ export default function RecommendedProducts() {
 
       <div className="w-full flex gap-5">
         <div className="rounded-md basis-1/6 p-4">
-          <FiltersSection />
+          <FiltersSection listaFiltros={listaFiltros} />
         </div>
 
-        <div className="rounded-md basis-5/6 p-4">
-          <ProductGrid filteredProducts={paginatedProducts} loading={loading} />
+        <div className="rounded-md basis-5/6 p-4 flex flex-col gap-5">
+          <ProductGrid products={products} loading={loading} />
+          <PaginationControls totalPages={totalPages} />
         </div>
       </div>
-      <PaginationControls
-        hasNextPage={end < filteredProducts.length}
-        hasPrevPage={start > 0}
-        totalPages={Math.ceil(filteredProducts.length / per_page)}
-        currentPage={page}
-        perPage={per_page}
-      />
     </div>
   );
 }
