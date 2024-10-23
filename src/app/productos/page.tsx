@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import RecommendedProducts from "../sections/ProductsSections/Products";
 import Products from "../sections/ProductsSections/Products";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -66,6 +66,11 @@ export default function Home({
     router.push(`?page=${page}&productsPerPage=${value}`);
   };
 
+  const listaFiltros = useMemo(() => {
+    const subRubros = data.map((product) => product.subRubro);
+    return Array.from(new Set(subRubros));
+  }, [products]);
+
   return (
     <div className="w-screen overflow-x-hidden min-h-screen">
       <Suspense fallback={<div>Loading...</div>}>
@@ -77,6 +82,7 @@ export default function Home({
           setSearchTerm={setSearchTerm}
           productsPerPage={productsPerPage}
           setProductsPerPage={handleProductsPerPageChange}
+          listaFiltros={listaFiltros}
         />
       </Suspense>
     </div>

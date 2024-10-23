@@ -37,6 +37,7 @@ export default function Products({
   setSearchTerm,
   productsPerPage,
   setProductsPerPage,
+  listaFiltros,
 }: {
   products: Product[];
   loading: any;
@@ -45,6 +46,7 @@ export default function Products({
   setSearchTerm: any;
   productsPerPage: number;
   setProductsPerPage: any;
+  listaFiltros: string[];
 }) {
   const filteredProducts = useMemo(() => {
     const searchWords = searchTerm.toLowerCase().split(" ").filter(Boolean);
@@ -114,7 +116,7 @@ export default function Products({
 
       <div className="w-full flex gap-5">
         <div className="rounded-md basis-1/6 p-4">
-          <FiltersSection />
+          <FiltersSection listaFiltros={listaFiltros} />
         </div>
 
         <div className="rounded-md basis-5/6 p-4 flex flex-col gap-5">
