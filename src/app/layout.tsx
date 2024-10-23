@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/generalComponents/Navbar";
 import { Poppins } from "next/font/google";
-
+import "next-cloudinary/dist/cld-video-player.css";
 const poppins = Poppins({
   weight: ["400", "500", "600", "700", "900"],
   subsets: ["latin"],

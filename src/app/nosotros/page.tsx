@@ -1,19 +1,29 @@
+"use client";
 import React from "react";
 import GallerySection from "@/components/nosotrosComponents/GallerySection";
+import { CldVideoPlayer } from "next-cloudinary";
 
 export default function Nosotros() {
   return (
-    <div className="flex flex-col gap-2 justify-center items-center">
-      <div>
-        <div>
-          <video preload="metadata" width="320" height="240"></video>
+    <div className="flex flex-col items-center gap-6">
+      <div className="w-full h-[620px] relative overflow-hidden">
+        <div className="absolute inset-0">
+          <CldVideoPlayer
+            src="/portada-video_quf8dc"
+            autoplay={true}
+            loop={true}
+            muted
+            hideContextMenu
+            className="object-bottom"
+            controls={false}
+          />
         </div>
       </div>
-      <div className="flex flex-col gap-3 justify-center items-center">
-        <h3 className="font-poppins text-[48px]/[58px] text-azulOscuro2">
+      <div className="flex flex-col gap-6 items-center mt-8">
+        <h3 className="font-poppins text-[48px]/[58px] text-azulOrg">
           <b>SOBRE</b> NOSOTROS
         </h3>
-        <div className="font-poppins text-center flex justify-center items-center mx-auto w-[60%] text-[16px]/[24px]">
+        <div className="font-poppins text-center w-[50%] text-[16px]/[24px]">
           Somos una joven empresa dedicada a comercializar e integrar tecnología
           con el fin de brindar soluciones a diversas industrias y
           organizaciones privadas y públicas en diferentes puntos de la

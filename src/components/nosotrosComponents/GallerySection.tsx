@@ -65,10 +65,10 @@ const imagenes = [
 
 export default function GallerySection() {
   return (
-    <section className="py-[70px] w-full flex flex-col gap-5 justify-center lg:justify-start items-center overflow-hidden lg:px-[100px] px-[15px]">
-      <div className="max-w-[1600px]  w-full flex justify-center lg:justify-between items-center mx-auto overflow-hidden ">
-        <p className="font-poppins text-[48px]/[58px] text-azulOscuro2">
-          <b>Nuestro</b> Local
+    <section className="py-[70px] w-full flex flex-col gap-6 justify-center lg:justify-start items-center overflow-hidden lg:px-[100px] px-[15px]">
+      <div className="max-w-[1600px] w-full flex justify-center lg:justify-between items-center mx-auto overflow-hidden text-center">
+        <p className="font-poppins text-center text-[48px]/[58px] text-azulOrg w-full">
+          <b>NUESTRO</b> LOCAL
         </p>
       </div>
       <LightBox photos={imagenes} />
