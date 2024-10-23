@@ -31,7 +31,7 @@ export default function HomeProductsCarousel() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://computienda-nu.vercel.app/api/productos"
+          "https://computienda-nu.vercel.app/api/productosRecomendados"
         );
 
         if (!response.ok) {
@@ -57,8 +57,8 @@ export default function HomeProductsCarousel() {
   const recomendados = data.slice(0, 100);
 
   return (
-    <div className="flex flex-col gap-5 py-5">
-      <p className="text-[#4D5461] text-2xl font-bold text-center ">
+    <div className="flex flex-col gap-7 py-7 items-center justify-center pb-12">
+      <p className="text-grisOscuro text-2xl font-bold text-center ">
         Productos recomendados
       </p>
       <Carousel
@@ -66,26 +66,30 @@ export default function HomeProductsCarousel() {
           align: "start",
           loop: true,
         }}
-        className="max-w-[1600px] relative mx-[100px]"
+        className="max-w-[1400px] relative mx-[100px]"
       >
         <CarouselContent>
           {recomendados && recomendados.length > 0 ? (
             recomendados.map((prod, i) => {
               return (
-                <CarouselItem className="basis-1/4" key={i}>
+                <CarouselItem className="basis-1/5" key={i}>
                   <ProductCard
                     name={prod.nombre}
                     price={100}
                     codigoInterno={prod.codigoInterno}
+                    imagen={prod.imagenes}
+                    marca={prod.marca}
                   />
                 </CarouselItem>
               );
             })
           ) : (
-            <p>No hay productos</p>
+            <div className="flex justify-center items-center">
+              <p>No hay productos</p>
+            </div>
           )}
         </CarouselContent>
-        <div className="border w-full h-full">
+        <div className="w-full h-full">
           <CarouselPrevious />
           <CarouselNext />
         </div>

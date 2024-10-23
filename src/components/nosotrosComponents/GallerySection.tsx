@@ -65,7 +65,7 @@ const imagenes = [
 
 export default function GallerySection() {
   return (
-    <section className="py-6 w-full flex flex-col gap-6 justify-center lg:justify-start items-center overflow-hidden lg:px-[100px] px-[15px] bg-grisPastel">
+    <section className="py-5 pb-8 w-full flex flex-col gap-6 justify-center lg:justify-start items-center overflow-hidden lg:px-[100px] bg-grisPastel">
       <div className="max-w-[1600px] w-full flex justify-center lg:justify-between items-center mx-auto overflow-hidden text-center">
         <p className="font-poppins text-center text-[48px]/[58px] text-azulOrg w-full">
           <b>NUESTRO</b> LOCAL
