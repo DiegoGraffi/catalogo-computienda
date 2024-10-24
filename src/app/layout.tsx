@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/generalComponents/Navbar";
 import { Poppins } from "next/font/google";
 import "next-cloudinary/dist/cld-video-player.css";
+import Footer from "@/components/generalComponents/Footer";
 const poppins = Poppins({
   weight: ["400", "500", "600", "700", "900"],
   subsets: ["latin"],
@@ -21,10 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${poppins} antialiased overflow-x-hidden`}>
+      <body
+        className={`${poppins} antialiased overflow-x-hidden web-display font-poppins`}
+      >
         <Navbar />
-
         {children}
+        <Footer />
       </body>
     </html>
   );

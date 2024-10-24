@@ -2,6 +2,7 @@
 import React from "react";
 import GallerySection from "@/components/nosotrosComponents/GallerySection";
 import { CldVideoPlayer } from "next-cloudinary";
+import SectionTitle from "@/components/generalComponents/SectionTitle";
 
 export default function Nosotros() {
   return (
@@ -22,10 +23,8 @@ export default function Nosotros() {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-6 items-center">
-        <h3 className="font-poppins text-[48px]/[58px] text-azulOrg">
-          <b>SOBRE</b> NOSOTROS
-        </h3>
+      <div className="flex flex-col gap-6 items-center justify-center">
+        <SectionTitle title_bold="SOBRE" title_regular="NOSOTROS" />
         <div className="font-poppins text-center w-[50%] text-[16px]/[24px]">
           Somos una joven empresa dedicada a comercializar e integrar tecnología
           con el fin de brindar soluciones a diversas industrias y
