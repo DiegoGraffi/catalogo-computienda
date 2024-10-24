@@ -37,7 +37,7 @@ export default function Nosotros() {
         </div>
       </div>
       <GallerySection />
-      <div>Reseñas</div>
+      <div className="mb-5">(Reseñas)</div>
     </div>
   );
 }

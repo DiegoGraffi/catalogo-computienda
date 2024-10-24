@@ -67,7 +67,7 @@ export default function rodeProductCard({
           </p>
         </div>
 
-        <div className="flex justify-center items-center bg-[#6D717F] group-hover:bg-[#00AFEF] transition-all ease-in-out duration-200 cursor-pointer">
+        <div className="flex justify-center items-center bg-azulOrg group-hover:bg-[#00AFEF] transition-all ease-in-out duration-200 cursor-pointer">
           <p className="font-semibold text-sm text-white text-center p-3">
             Consultar Producto
           </p>
