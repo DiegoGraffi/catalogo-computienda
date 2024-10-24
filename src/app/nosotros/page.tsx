@@ -10,12 +10,15 @@ export default function Nosotros() {
         <div className="absolute inset-0">
           <CldVideoPlayer
             src="/portada-video_quf8dc"
+            sourceTypes={["mp4", "webm"]}
             autoplay={true}
             loop={true}
             muted
+            preload="auto"
             hideContextMenu
             className="object-bottom"
             controls={false}
+            id="portada"
           />
         </div>
       </div>

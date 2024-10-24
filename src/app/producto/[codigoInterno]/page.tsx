@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Logo from "@/assets/logoSmall.png";
+import Logo from "@/assets/images/logoSmall.png";
 import { CreditCard, MessageCircleIcon, Truck } from "lucide-react";
 
 export default async function Producto({

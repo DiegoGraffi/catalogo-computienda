@@ -26,7 +26,7 @@ export default function LightBox({ photos }: PhotoListProps) {
       <div className="flex max-w-[1600px] mx-auto relative h-auto">
         <div className="h-full hidden lg:flex w-[150px]  absolute z-50 touch-disabled left-0"></div>
         <div className="h-full hidden lg:flex w-[150px]  to-transparent absolute top-0 right-0 z-50 touch-disabled"></div>
-        <ScrollContainer className="w-full overflow-x-scroll scrollbar-hide cursor-grab active:cursor-grabbing">
+        <ScrollContainer className="w-full overflow-x-scroll scroll-container scrollbar-hide cursor-grab active:cursor-grabbing ">
           <div className="w-max flex flex-col gap-[10px]">
             <div className="flex gap-[10px] w-full">
               {firstRow.map((photo, index) => (
